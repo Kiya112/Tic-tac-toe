@@ -17,29 +17,40 @@ twoplayerBtn.addEventListener('click',()=> {
 const firstBox = document.querySelectorAll('.box');
 firstBox.forEach((box) =>{
     box.addEventListener('click',()=>{
+        if(gameover == true){ return }
+        
         const index = Array.from(firstBox).indexOf(box)
         boardState[index] = currentPlayer
+        
         if(currentPlayer == 'X'){
             box.innerHTML = '<img src="assets/X logo.jpg">'
-            currentPlayer = 'O'
         } else { 
             box.innerHTML = '<img src="assets/O logo.jpg">'
+        }
+        
+        checkwinner()
+        
+        if(currentPlayer == 'X'){
+            currentPlayer = 'O'
+        } else {
             currentPlayer = 'X'
         }
-        checkwinner()
-        if(gameover == false && boardState.every((box) => box != '')){
+        
+        if(gameover == false && boardState.every((b) => b != '')){
             tie++
-            alert('Its a tie!')
+            document.getElementById('popupMessage').innerText = "It's a tie!"
+            document.querySelector('.popup').style.display = 'flex'
             document.getElementById('tie').innerText = tie
             gameover = true
         }
+        
         if(gameMode == 'single' && currentPlayer == 'O' && gameover == false){
             setTimeout(() => {
                 compturePlay()
             }, 500)
         }
-    })  // ← closes addEventListener
-})  // ← closes forEach
+    })
+})
 
 function compturePlay(){  // ← outside forEach!
     const emptyIndexes = [0,1,2,3,4,5,6,7,8].filter((i) => boardState[i] == '')
@@ -66,7 +77,8 @@ winningRowsColounms.forEach((combination) => {
 if(boardState[a] != '' &&
    boardState[a] == boardState[b] && 
    boardState[b] == boardState[c]){
-    alert(`player ${currentPlayer} wins!!`)
+    document.getElementById('popupMessage').innerText = `Player ${currentPlayer} wins!`
+document.querySelector('.popup').style.display = 'flex'
     gameover = true
     if( currentPlayer == 'X'){
       playerxwins ++
@@ -77,12 +89,21 @@ if(boardState[a] != '' &&
         document.getElementById('playeroScore').innerText = playerowins
     }
     
+   } 
+} )  
 }
-
+ const okBtn = document.getElementById('okBtn')
+ 
+    okBtn.addEventListener('click',()=>{
+       document.querySelector('.popup').style.display = 'none'
+       boardState = ['','','','','','','','','']
+   currentPlayer = 'X'
+   gameover = false
+   firstBox.forEach((box)=>{
+    box.innerHTML = ''
+   })
     
-
-})
-}
+    })
 const restartbtn = document.getElementById('restartBtn')
 restartbtn.addEventListener('click',()=>{
    boardState = ['','','','','','','','','']
@@ -106,8 +127,3 @@ singleBtn.addEventListener('click',()=> {
 const gamebr = document.querySelector('.game-board')
         gamebr.style.display = 'grid'
 })
-
-
-
-
-     

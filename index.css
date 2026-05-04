@@ -66,3 +66,175 @@ height: 150px;
    justify-content: center;
    gap:20px;
 }
+.form{
+    display: flex;
+    justify-content: center;
+    font-family: cursive;
+   
+    
+}
+.form input{
+    background-color:#00FFFF;
+     border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: solid #00FFFF;
+    font-family: cursive;
+}
+.popup{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(54, 54, 76);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* =========================
+   Tablet Screen
+========================= */
+@media (max-width: 768px) {
+  body {
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  /* Buttons */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .button-container button {
+    width: 80%;
+    max-width: 300px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* Score board */
+  .score-board {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .playerx-score,
+  .tie-board,
+  .playero-score {
+    width: 120px;
+    padding: 10px;
+  }
+
+  .score-board h6 {
+    font-size: 14px;
+  }
+
+  .score-board p {
+    font-size: 20px;
+  }
+
+  /* Form */
+  .form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form input {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+  }
+
+  /* Game board */
+  .game-board {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .box {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+  }
+
+  /* Restart button */
+  .btn-container {
+    text-align: center;
+  }
+
+  #restartBtn {
+    width: 180px;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+
+/* =========================
+   Small Phone Screen
+========================= */
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
+
+  .score-board {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .playerx-score,
+  .tie-board,
+  .playero-score {
+    width: 90%;
+    max-width: 250px;
+  }
+
+  .form input {
+    width: 100%;
+  }
+
+  .game-board {
+    width: 240px;
+    height: 240px;
+  }
+
+  .box {
+    width: 80px;
+    height: 80px;
+    font-size: 34px;
+  }
+
+  #restartBtn {
+    width: 100%;
+    max-width: 220px;
+  }
+}
