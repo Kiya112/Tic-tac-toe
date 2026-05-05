@@ -8,9 +8,6 @@ let tie = 0
 const twoplayerBtn = document.getElementById('twoPlayer');
 twoplayerBtn.addEventListener('click',()=> {
     gameMode = 'two'
-    if(gameover == true){
-        return
-    }
     const gamebr = document.querySelector('.game-board')
     gamebr.style.display = "grid"
 })
@@ -55,9 +52,11 @@ firstBox.forEach((box) =>{
 function compturePlay(){  // ← outside forEach!
     const emptyIndexes = [0,1,2,3,4,5,6,7,8].filter((i) => boardState[i] == '')
     const index = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)]
-    currentPlayer = 'X'
-    boardState[index] = 'O'
-    firstBox[index].innerHTML = '<img src="assets/O logo.jpg">'
+     boardState[index] = 'O'
+     firstBox[index].innerHTML = '<img src="assets/O logo.jpg">'
+    checkwinner()
+     currentPlayer = 'X'
+    
 }
 
 
@@ -77,18 +76,17 @@ winningRowsColounms.forEach((combination) => {
 if(boardState[a] != '' &&
    boardState[a] == boardState[b] && 
    boardState[b] == boardState[c]){
+    if(gameMode == 'single'){
+    if(currentPlayer == 'X'){
+        document.getElementById('popupMessage').innerText = 'You win!'
+    } else {
+        document.getElementById('popupMessage').innerText = 'Computer wins!'
+    }
+} else {
     document.getElementById('popupMessage').innerText = `Player ${currentPlayer} wins!`
-document.querySelector('.popup').style.display = 'flex'
-    gameover = true
-    if( currentPlayer == 'X'){
-      playerxwins ++
-      document.getElementById('playerxScore').innerText = playerxwins
-    }
-    else{
-        playerowins ++
-        document.getElementById('playeroScore').innerText = playerowins
-    }
-    
+}
+document.querySelector('.popup').style.display = 'flex'  
+            gameover = true  
    } 
 } )  
 }
@@ -114,16 +112,10 @@ restartbtn.addEventListener('click',()=>{
    })
     
 })
-
-
- let contestPlayer = 'X' 
+ 
 const singleBtn = document.getElementById('singlePlayer')
 singleBtn.addEventListener('click',()=> {
     gameMode = 'single'
-    if(gameMode == 'single'){
-    compturePlay()
-    
-}
 const gamebr = document.querySelector('.game-board')
         gamebr.style.display = 'grid'
 })
